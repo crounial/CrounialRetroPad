@@ -1,11 +1,12 @@
 ; --------------------------------------------------------- 
+; Crounial Retro Pad (crpad)
 ;  _____      _             _____          _ 
 ; |  __ \    | |           |  __ \        | |
 ; | |__) |___| |_ _ __ ___ | |__) |_ _  __| |
 ; |  _  // _ \ __| '__/ _ \|  ___/ _` |/ _` |
 ; | | \ \  __/ |_| | | (_) | |  | (_| | (_| |
 ; |_|  \_\___|\__|_|  \___/|_|   \__,_|\__,_|
-; T I N Y  X 86   D E S K T O P   E D I T O R                                            
+; C R O U N I A L
 ; --------------------------------------------------------- 
 ; (c) 2026 Plummer's Software, Ltd.
 ; Based on Dave's Tiny Editor 2.0.9 
@@ -291,10 +292,9 @@ MFont       db "&Font...",0
 MStatusBar  db "&Status Bar",0
 
 MViewHelp   db "&View Help",0
-MAbout      db "&About TinyRetroPad",0
-AboutCap    db "TinyRetroPad",0
-AboutText   db "TinyRetroPad - tiny notepad-style editor",0
-SaveCap     db "TinyRetroPad",0
+ProductName db "Crounial Retro Pad",0
+MAbout      db "&About Crounial Retro Pad",0
+AboutText   db "Crounial Retro Pad - tiny notepad-style editor",0
 SaveAskText db "Save changes?",0
 SpaceText   db " ",0
 DateBuf     db 32 dup (0)
@@ -309,7 +309,6 @@ hFindDlg    dd 0                   ; modeless find/replace dialog HWND
 uFindMsg    dd 0                   ; registered FINDMSGSTRING message
 
 StaticClass db "STATIC",0          ; built-in class for status bar pane
-DocName     db "TinyRetroPad",0    ; print job document name
 LnColFmt    db "  Ln %d, Col %d",0 ; status bar Ln/Col format
 StatusBuf   db 48 dup (0)          ; formatted Ln/Col text
 hStatus     dd 0                   ; status bar window handle
@@ -328,7 +327,7 @@ ENDIF
 
 hInst       dd 0                   ; module handle (for dialogs)
 OpenVerb    db "open",0            ; ShellExecute verb
-HelpUrl     db "https://github.com/davepl",0
+HelpUrl     db "https://github.com/crounial/TinyRetroPad",0
 
 ; in-memory Go To dialog template (no font block to stay compact)
 ALIGN 4
@@ -620,7 +619,7 @@ MaybeSaveChanges proc NEAR
 
     AskSave:
         push    MB_YESNOCANCEL or MB_ICONQUESTION
-        push    OFFSET SaveCap
+        push    OFFSET ProductName
         push    OFFSET SaveAskText
         mov     eax, hMain
         push    eax
@@ -1006,7 +1005,7 @@ PrintDoc proc NEAR
     mov     ecx, SIZEOF DOCINFOA
     rep     stosb
     mov     docInf.cbSize, SIZEOF DOCINFOA
-    mov     docInf.lpszDocName, OFFSET DocName
+    mov     docInf.lpszDocName, OFFSET ProductName
     lea     eax, docInf
     push    eax
     push    hPrnDC
@@ -2575,7 +2574,7 @@ ENDIF
 
     CmdHelpAbout:
         push    MB_OK or MB_ICONINFORMATION
-        push    OFFSET AboutCap
+        push    OFFSET ProductName
         push    OFFSET AboutText
         push    hWnd
         call    MessageBoxA

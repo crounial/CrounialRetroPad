@@ -1,5 +1,5 @@
-; Minimal Win32 constants and structs for TinyRetroPad
-; Sufficient types/constants for trpad.asm with Visual Studio ml.exe
+; Minimal Win32 constants and structs for Crounial Retro Pad
+; Sufficient types/constants for crpad.asm with Visual Studio ml.exe
 
 NULL                    equ 0
 FALSE                   equ 0
@@ -298,7 +298,7 @@ CHOOSEFONTW STRUCT
   nSizeMax          DWORD ?
 CHOOSEFONTW ENDS
 
-; CHARFORMATW is 92 bytes (matches RichFont data layout in trpad.asm)
+; CHARFORMATW is 92 bytes (matches RichFont data layout in crpad.asm)
 CHARFORMATW STRUCT
   cbSize            DWORD ?
   dwMask            DWORD ?

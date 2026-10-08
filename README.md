@@ -6,18 +6,18 @@
  |  _  // _ \ __| '__/ _ \|  ___/ _` |/ _` |
  | | \ \  __/ |_| | | (_) | |  | (_| | (_| |
  |_|  \_\___|\__|_|  \___/|_|   \__,_|\__,_|
- T I N Y  X 86   D E S K T O P   E D I T O R
+ C R O U N I A L
 ```
 
-# TinyRetroPad
+# Crounial Retro Pad
 
 A working, Notepad-style Windows text editor written in x86 assembly.
 
 Compiles with: Visual Studio MASM (`ml.exe`) and the Microsoft linker (`link.exe`), from an x86 Developer Command Prompt.
 
-TinyRetroPad is a fork of **Dave's Tiny Editor (DTE)** by Matt Power, which is itself an extension of `tiny.asm` [HelloAssembly](https://github.com/PlummersSoftwareLLC/HelloAssembly) by [Dave Plummer](https://github.com/davepl). The original goal was a working windowed text editor in the sub-1KB category; TinyRetroPad keeps that minimalist, size-obsessed spirit while filling out a full Notepad-style menu set (File / Edit / Format / View / Help) on top of it. Older DTE builds used [Crinkler](https://github.com/runestubbe/Crinkler) to compress the EXE; this tree links with the normal MSVC linker instead.
+Crounial Retro Pad (crpad) is crounial's fork of **Dave's Tiny Editor (DTE)** by Matt Power, which is itself an extension of `tiny.asm` [HelloAssembly](https://github.com/PlummersSoftwareLLC/HelloAssembly) by [Dave Plummer](https://github.com/davepl). The original goal was a working windowed text editor in the sub-1KB category; Crounial Retro Pad keeps that minimalist, size-obsessed spirit while filling out a full Notepad-style menu set (File / Edit / Format / View / Help) on top of it. Older DTE builds used [Crinkler](https://github.com/runestubbe/Crinkler) to compress the EXE; this tree links with the normal MSVC linker instead.
 
-TinyRetroPad is basically a wrapper around the RICHEDIT50W control from the WinAPI. DTE versions 1.0+ used the EDIT control with Crinkler cranked and were built up from tiny.asm, then worked down to 890 bytes with Win Defender quite unhappy. Versions 2.0+ backed Crinkler off a bit and use RICHEDIT to gain cheaper access to Courier font and much larger files; 2.0+ was worked down from 995 to 981 bytes as a bare editor. TinyRetroPad then grows from that 981-byte base by adding real menus and dialogs — Open/Save/Save As, Print/Page Setup, Find/Replace/Go To, Font, Word Wrap, Time/Date, and a Ln/Col status bar. Each addition was kept as cheap as possible; the growth log at the top of [trpad.asm](trpad.asm) records what every feature cost in the old compressed builds.
+Crounial Retro Pad is basically a wrapper around the RICHEDIT50W control from the WinAPI. DTE versions 1.0+ used the EDIT control with Crinkler cranked and were built up from tiny.asm, then worked down to 890 bytes with Win Defender quite unhappy. Versions 2.0+ backed Crinkler off a bit and use RICHEDIT to gain cheaper access to Courier font and much larger files; 2.0+ was worked down from 995 to 981 bytes as a bare editor. Crounial Retro Pad then grows from that 981-byte base by adding real menus and dialogs — Open/Save/Save As, Print/Page Setup, Find/Replace/Go To, Font, Word Wrap, Time/Date, and a Ln/Col status bar. Each addition was kept as cheap as possible; the growth log at the top of [crpad.asm](crpad.asm) records what every feature cost in the old compressed builds.
 
 - Assemble and link from a **Visual Studio Developer Command Prompt** (x86 Native Tools, or x64_x86 Cross Tools). `build.bat` uses the 32-bit `ml.exe` and `link.exe` from that environment. If they are not on PATH, it looks them up with `vswhere`.
 
@@ -32,17 +32,17 @@ TinyRetroPad is basically a wrapper around the RICHEDIT50W control from the WinA
 
 | File | Description |
 | - | - |
-| `build.bat` | Builds TinyRetroPad from command line. |
+| `build.bat` | Builds Crounial Retro Pad from command line. |
 | `DRAG ME ONTO DTE.txt` | How to use the editor. |
 | `DTE ABOUT.txt` | Explains some design decisions. |
-| `trpad.asm` | The program. TinyRetroPad, forked from DTE 2.0.9 |
-| `windows.inc` | Minimal Win32 constants and structs used by `trpad.asm`. |
+| `crpad.asm` | The program. Crounial Retro Pad, forked from DTE 2.0.9 |
+| `windows.inc` | Minimal Win32 constants and structs used by `crpad.asm`. |
 | `LICENSE.TXT` | Usage permissions (Apache License 2.0). |
 
 ## Building the menus and Notepad features
 
 Everything past the bare RICHEDIT wrapper is built up the same way: keep the control doing the heavy lifting, and let the WinAPI common dialogs and a few `SendMessage` calls supply the rest. Almost every "feature" is just a menu ID routed to a one- or two-instruction handler, so the byte cost stays tiny. The
-growth log at the top of [trpad.asm](trpad.asm) tracks what each addition cost.
+growth log at the top of [crpad.asm](crpad.asm) tracks what each addition cost.
 
 ### The menu bar
 
@@ -109,10 +109,10 @@ The status bar is a plain `STATIC` child window created with `CreateWindowExA`. 
 
 ## Credits
 
-- **TinyRetroPad** — fork adding the full Notepad-style menu set and dialogs.
+- **Crounial Retro Pad (crpad)** — crounial's fork, adding the full Notepad-style menu set and dialogs.
 - **Dave's Tiny Editor (DTE)** — Matt Power, the sub-1KB RICHEDIT editor this fork is built on.
 - **`tiny.asm` / [HelloAssembly](https://github.com/PlummersSoftwareLLC/HelloAssembly)** — [Dave Plummer](https://github.com/davepl), the original foundation.
 
-## TinyRetroPad in use
+## Crounial Retro Pad in use
 
-![TinyRetroPad in action](images/dte-in-action.png)
+![Crounial Retro Pad in action](images/dte-in-action.png)

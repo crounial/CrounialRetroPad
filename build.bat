@@ -28,19 +28,19 @@ if not defined KITLIB (
   exit /b 1
 )
 
-"!MLEXE!" /nologo /c /coff /Cp trpad.asm
+"!MLEXE!" /nologo /c /coff /Cp crpad.asm
 if errorlevel 1 exit /b 1
 
 "!LINKEXE!" /nologo /SUBSYSTEM:WINDOWS /NODEFAULTLIB /MACHINE:X86 /SAFESEH:NO ^
-  /OUT:trpad.exe trpad.obj ^
+  /OUT:crpad.exe crpad.obj ^
   /LIBPATH:"!KITLIB!" ^
   kernel32.lib user32.lib shell32.lib comdlg32.lib gdi32.lib
 if errorlevel 1 (
-  del trpad.obj >nul 2>nul
+  del crpad.obj >nul 2>nul
   exit /b 1
 )
 
-del trpad.obj
+del crpad.obj
 exit /b 0
 
 rem ---------------------------------------------------------------------------
